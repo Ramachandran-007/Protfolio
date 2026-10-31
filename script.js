@@ -13,11 +13,11 @@ const context = canvas.getContext('2d');
 const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const pause = document.querySelector('.motion-button');
 const modes = {
-  ai: { title: 'Neural connections', subtitle: 'Curiosity → possibility', description: 'AI lens: a connected network of ideas, data, and possibilities.', color: '#8473ad' },
+  ai: { title: 'Neural connections', subtitle: 'Curiosity → possibility', description: 'AI / ML lens: machine learning, data analysis, and AI-assisted development.', color: '#8473ad' },
   erp: { title: 'Connected workflows', subtitle: 'People → process → progress', description: 'ERPNext lens: structured connections between people, processes, and data.', color: '#718446' },
-  security: { title: 'Layers of trust', subtitle: 'Observe → protect → adapt', description: 'Security lens: a protective mesh around the systems that matter.', color: '#4c8489' }
+  manufacturing: { title: 'Manufacturing systems', subtitle: 'People → production → progress', description: 'Manufacturing lens: connected processes, data, and enterprise systems.', color: '#4c8489' }
 };
-let mode = 'ai', width = 0, height = 0, angle = .25, tilt = .25, frame = 0;
+let mode = 'erp', width = 0, height = 0, angle = .25, tilt = .25, frame = 0;
 let paused = motion.matches, visible = true, dragging = false, lastX = 0, lastY = 0;
 const points = Array.from({ length: 62 }, (_, i) => {
   const y = 1 - (i / 61) * 2;
@@ -33,7 +33,7 @@ function draw() {
   const projected = points.map((p, i) => {
     let x = p.x, y = p.y, z = p.z;
     if (mode === 'erp') { x = Math.round(x * 2) / 2; y = Math.round(y * 2) / 2; z = Math.round(z * 2) / 2; }
-    if (mode === 'security') { const ring = i % 3; const t = (i / 62) * Math.PI * 6; x = Math.cos(t); y = Math.sin(t) * (ring === 0 ? .35 : .85); z = Math.sin(t) * (ring === 0 ? .85 : .35); }
+    if (mode === 'manufacturing') { const ring = i % 3; const t = (i / 62) * Math.PI * 6; x = Math.cos(t); y = Math.sin(t) * (ring === 0 ? .35 : .85); z = Math.sin(t) * (ring === 0 ? .85 : .35); }
     const rx = x * Math.cos(angle) - z * Math.sin(angle);
     const rz = x * Math.sin(angle) + z * Math.cos(angle);
     const ry = y * Math.cos(tilt) - rz * Math.sin(tilt);
